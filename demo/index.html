@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<HTML>
+    <HEAD>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Prechan">
+        
+        <title>Leaflet.Resizer</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <link rel="stylesheet" href="../dist/leaflet.resizer.min.css"/>
+        
+        <style>
+            #map{
+                width: 50vw;
+                height: 50vh;
+            }
+        </style>
+    </HEAD>
+    <BODY>
+        <p><a href="https://github.com/Prechan/Leaflet.Resizer">Leaflet.Resizer Demo</a></p>
+        <div id="map"></div>  
+        
+        <script src="https://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <script type="text/javascript" src="../dist/leaflet.resizer.min.js"></script>
+        <script type="text/javascript">
+            var map = L.map('map').locate({
+                setView: true
+            });
+            
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	            maxZoom: 18,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            
+            L.resizer().addTo(map);
+            
+            // Google Analytics
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-36249601-2', 'auto');
+              ga('send', 'pageview');
+        </script>
+    </BODY>
+</HTML>

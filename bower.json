@@ -1,0 +1,30 @@
+{
+	"name": "Leaflet.Resizer",
+	"homepage": "https://github.com/Prechan/Leaflet.resizer",
+	"authors": [
+		"Prechan <prechan@protonmail.com>"
+	],
+	"description": "Easily resize your leaflet map container with a button.",
+	"main": [
+		"dist/leaflet.resizer.min.js",
+		"dist/leaflet.resizer.min.css"
+	],
+	"dependencies": {
+		"leaflet": "~0.7.7"
+	},
+	"keywords": [
+		"leaflet",
+		"resizer",
+		"font-awesome",
+		"vanillajs",
+		"button",
+		"control",
+		"map"
+	],
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components"
+	]
+}
