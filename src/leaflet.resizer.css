@@ -1,72 +1,94 @@
-/* 
-    CSS File for Leaflet.Dimensions plugin
-    Author     : phumez
+/*
+    CSS File for Leaflet.Resizer plugin
+    Author: phumez
 */
 
-*{
+/* Scope box-sizing to the plugin only */
+.lr-ctl,
+.lr-ctl *,
+.lr-ctl *::before,
+.lr-ctl *::after {
     box-sizing: border-box;
 }
 
-.lr-ctl{
-    width: 26px;
-    height: 26px;
+/* ── Collapsed state — matches Leaflet zoom button (30×30) ── */
+.lr-ctl {
+    width: 30px;
+    height: 30px;
     overflow: hidden;
-    line-height: 26px;
-    text-align: center;
-    background-color: #FFFFFF;
-}
-
-.lr-ctl:hover{
-    width: 95px;
-    height: 95px;
-    position: relative;
-}
-
-.lr-ctl:hover .lr-icon{
-    display: none;
-}
-
-.lr-ctl:hover .lr-input-container{
-    margin-top: 3px;
-}
-
-.lr-input-container{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.lr-input{
-    width: 40px;
-    height: 24px;
-}
-
-.lr-btn{
-    width: auto;
-    max-width: 60px;
-    height: 26px;
-    margin: auto;
-    margin-top: 10px;
-    background-color: #5cb85c;
-    border: 1px solid rgba(37,86,37,0.5);
-    border-radius: 4px;
-    color: #FFFFFF;
-    font-weight: 600;
-    vertical-align: middle;
-}
-
-.lr-btn:hover{
-    background-color: #449d44;
+    background-color: #ffffff;
     cursor: pointer;
 }
 
-.lr-label{
-    margin-bottom: 0px;
+/* ── Expanded state on hover ── */
+.lr-ctl:hover {
+    width: 112px;
+    height: auto;
+    cursor: default;
 }
 
-.lr-icon{
+.lr-ctl:hover .lr-icon {
+    display: none;
+}
+
+/* ── Input panel (hidden until hovered) ── */
+.lr-input-container {
+    display: none;
+}
+
+.lr-ctl:hover .lr-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 6px 8px 8px;
+}
+
+/* ── Labels ("Width" / "Height") ── */
+.lr-label {
+    flex: 1 1 calc(50% - 2px);
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: center;
+    color: #555555;
+}
+
+/* ── Number inputs ── */
+.lr-input {
+    flex: 1 1 calc(50% - 2px);
+    height: 24px;
+    padding: 0 4px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    font-size: 11px;
+    text-align: center;
+    color: #333333;
+}
+
+.lr-input:focus {
+    outline: none;
+    border-color: #5cb85c;
+}
+
+/* ── Resize button — full width, last row ── */
+.lr-btn {
+    flex: 0 0 100%;
+    height: 26px;
+    background-color: #5cb85c;
+    border: 1px solid rgba(37, 86, 37, 0.5);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.lr-btn:hover {
+    background-color: #449d44;
+}
+
+/* ── Expand icon — centered in the 30×30 button ── */
+.lr-icon {
     display: block;
-    margin: auto;
-    margin-top: 4px;
+    margin: 6px auto 0; /* (30 - 18) / 2 = 6px top offset */
+    color: #333333;
 }
-
