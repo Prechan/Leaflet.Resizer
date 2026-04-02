@@ -1,9 +1,9 @@
 {
   "name": "leaflet.resizer",
-  "version": "0.1.3",
-  "description": "Easily resize your leaflet map container with a button.",
-  "main": "src/leaflet.resizer.min.js",
-  "style": "src/leaflet.resizer.min.css",
+  "version": "0.2.0",
+  "description": "Easily resize your Leaflet map container with a button.",
+  "main": "dist/leaflet.resizer.min.js",
+  "style": "dist/leaflet.resizer.min.css",
   "author": "Prechan",
   "repository": {
     "type": "git",
@@ -12,7 +12,6 @@
   "keywords": [
     "leaflet",
     "resizer",
-    "font-awesome",
     "vanillajs",
     "button",
     "control",
@@ -23,19 +22,13 @@
     "url": "https://github.com/Prechan/Leaflet.Resizer/issues"
   },
   "homepage": "https://github.com/Prechan/Leaflet.Resizer",
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-cssbeautify": "^0.1.3",
-    "gulp-csscomb": "^3.0.6",
-    "gulp-csso": "^1.1.0",
-    "gulp-load-plugins": "^1.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.3",
-    "load-plugins": "^2.1.0"
+  "peerDependencies": {
+    "leaflet": ">=1.0.0"
   },
-  "dependencies": {
-    "font-awesome": "~4.5.0",
-    "leaflet": "~0.7.7"
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "scripts": {
+    "build": "vite build"
   }
 }
