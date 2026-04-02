@@ -22,7 +22,7 @@
     position: relative;
 }
 
-.lr-ctl:hover .lr-span{
+.lr-ctl:hover .lr-icon{
     display: none;
 }
 
@@ -41,7 +41,7 @@
     height: 24px;
 }
 
-#lr-btn{
+.lr-btn{
     width: auto;
     max-width: 60px;
     height: 26px;
@@ -55,16 +55,18 @@
     vertical-align: middle;
 }
 
-#lr-btn:hover{
+.lr-btn:hover{
     background-color: #449d44;
     cursor: pointer;
 }
 
 .lr-label{
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
 }
 
-.fa-lg{
-    line-height: 0.7em;    
+.lr-icon{
+    display: block;
+    margin: auto;
+    margin-top: 4px;
 }
 
