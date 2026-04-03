@@ -1,5 +1,18 @@
+import './leaflet.resizer.css';
+
 (function () {
-    L.Control.resizer = L.Control.extend({
+    // Lucide "expand" icon — inline SVG, no external icon library needed
+    var EXPAND_ICON =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" ' +
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ' +
+        'class="lr-icon">' +
+        '<path d="m21 21-6-6m6 6v-4.8m0 4.8h-4.8"/>' +
+        '<path d="M3 16.2V21m0 0h4.8M3 21l6-6"/>' +
+        '<path d="M21 7.8V3m0 0h-4.8M21 3l-6 6"/>' +
+        '<path d="M3 7.8V3m0 0h4.8M3 3l6 6"/>' +
+        '</svg>';
+
+    L.Control.Resizer = L.Control.extend({
         options: {
             position: 'topleft',
             id: null,
@@ -7,45 +20,46 @@
             states: [],
             leafletClasses: true
         },
+
         onAdd: function (map) {
             var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom lr-ctl');
-            // Add all the elements into the container
-            container.innerHTML = '<span class="fa fa-arrows-alt fa-lg lr-span"></span><div class="lr-input-container"><label class="lr-label">Width</label><label class="lr-label">Height</label><input class="lr-input" name="lr-width" placeholder="Width"/><input class="lr-input" name="lr-height" placeholder="Height"/><button id="lr-btn" name="Resize">Resize</button></div>';
 
-            // Initiate behaviour on user click                        
-            container.onclick = function () {
-                lrInitiate(map);
-            };
+            container.innerHTML =
+                EXPAND_ICON +
+                '<div class="lr-input-container">' +
+                  '<div class="lr-row"><span class="lr-label">Width</span><input class="lr-input" name="lr-width"/></div>' +
+                  '<div class="lr-row"><span class="lr-label">Height</span><input class="lr-input" name="lr-height"/></div>' +
+                  '<button class="lr-btn" name="Resize">Resize</button>' +
+                '</div>';
+
+            // Prevent map interactions (pan, zoom) from firing through the control
+            L.DomEvent.disableClickPropagation(container);
+
+            var inputs = container.querySelectorAll('.lr-input');
+            var btn    = container.querySelector('.lr-btn');
+
+            // Populate inputs with current map size whenever the panel appears
+            L.DomEvent.on(container, 'mouseenter', function () {
+                var mapSize = map.getSize();
+                inputs[0].value = mapSize.x;
+                inputs[1].value = mapSize.y;
+            });
+
+            // Apply resize — registered once, no risk of duplicate listeners
+            L.DomEvent.on(btn, 'click', function (e) {
+                L.DomEvent.stopPropagation(e);
+                map.getContainer().style.width  = parseInt(inputs[0].value, 10) + 'px';
+                map.getContainer().style.height = parseInt(inputs[1].value, 10) + 'px';
+                map.invalidateSize();
+            });
+
             return container;
-        }
+        },
 
+        onRemove: function () {}
     });
-    L.resizer = function (/* args will pass automatically */) {
-        var args = Array.prototype.concat.apply([L.Control.resizer], arguments);
-        return new(Function.prototype.bind.apply(L.Control.resizer, args));
+
+    L.resizer = function (options) {
+        return new L.Control.Resizer(options);
     };
-
-    // Initiate behaviour (Inputs and Resizer)
-    function lrInitiate(map) {
-        var mapSize = map.getSize();
-
-        // Get input elements to put in value of map.getSize 
-        var inputs = document.getElementsByClassName('lr-input');
-        inputs[0].setAttribute('value', mapSize.x);
-        inputs[1].setAttribute('value', mapSize.y);
-
-        // Initiate resize button behaviour
-        var btn = document.getElementById('lr-btn');
-        btn.onclick = function () {
-            var newWidth = inputs[0].value + "px";
-            var newHeight = inputs[1].value + "px";
-            
-            map._container.style.width = newWidth;
-            map._container.style.height = newHeight;
-            
-            map.invalidateSize();
-        };
-    }
-
 })();
-
