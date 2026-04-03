@@ -1,6 +1,6 @@
 {
   "name": "leaflet.resizer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Easily resize your Leaflet map container with a button.",
   "main": "dist/leaflet.resizer.min.js",
   "style": "dist/leaflet.resizer.min.css",
