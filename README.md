@@ -1,7 +1,5 @@
 # Leaflet.Resizer
 
-[![npm version](https://badge.fury.io/js/leaflet.resizer.svg)](https://badge.fury.io/js/leaflet.resizer)
-
 Easily resize your Leaflet map container with a button in a one liner.
 
 Tested with [Leaflet](https://leafletjs.com/) 1.9.4 in Firefox and Chromium.

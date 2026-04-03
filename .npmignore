@@ -1,0 +1,7 @@
+# Exclude everything not needed by library consumers
+demo/
+src/
+tests/
+.claude/
+vite.config.js
+.nojekyll
