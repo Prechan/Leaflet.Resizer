@@ -2,9 +2,9 @@
 
 [![npm version](https://badge.fury.io/js/leaflet.resizer.svg)](https://badge.fury.io/js/leaflet.resizer)
 
-Easily resize your Leaflet map container with a button, in vanilla JS.
+Easily resize your Leaflet map container with a button in a one liner.
 
-Tested with [Leaflet](https://leafletjs.com/) 1.9.4 in Firefox and WebKit.
+Tested with [Leaflet](https://leafletjs.com/) 1.9.4 in Firefox and Chromium.
 
 ## Demo
 
@@ -20,13 +20,7 @@ You can check out the [Demo](https://prechan.github.io/Leaflet.Resizer/demo).
 npm install --save leaflet.resizer
 ```
 
-### The Classical Way
-
-Download and include
-[CSS file](https://raw.githubusercontent.com/Prechan/Leaflet.Resizer/gh-pages/dist/leaflet.resizer.min.css)
-and [JS file](https://raw.githubusercontent.com/Prechan/Leaflet.Resizer/gh-pages/dist/leaflet.resizer.min.js)
-
-### Initialize plugin (so easy !)
+### Initialize plugin
 
 ```javascript
 L.resizer().addTo(map);
@@ -34,7 +28,7 @@ L.resizer().addTo(map);
 
 #### Dependencies
 
-Obviously, Leaflet.Resizer needs [Leaflet](https://leafletjs.com/).
+Leaflet.Resizer needs [Leaflet](https://leafletjs.com/) 1.9.4+ to work.
 
 ## License
 
