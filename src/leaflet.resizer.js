@@ -27,18 +27,30 @@ import './leaflet.resizer.css';
             container.innerHTML =
                 EXPAND_ICON +
                 '<div class="lr-input-container">' +
-                  '<label class="lr-label">Width</label>' +
-                  '<label class="lr-label">Height</label>' +
-                  '<input class="lr-input" name="lr-width" placeholder="Width"/>' +
-                  '<input class="lr-input" name="lr-height" placeholder="Height"/>' +
+                  '<div class="lr-row"><span class="lr-label">Width</span><input class="lr-input" name="lr-width"/></div>' +
+                  '<div class="lr-row"><span class="lr-label">Height</span><input class="lr-input" name="lr-height"/></div>' +
                   '<button class="lr-btn" name="Resize">Resize</button>' +
                 '</div>';
 
             // Prevent map interactions (pan, zoom) from firing through the control
             L.DomEvent.disableClickPropagation(container);
 
-            L.DomEvent.on(container, 'click', function () {
-                lrInitiate(map, container);
+            var inputs = container.querySelectorAll('.lr-input');
+            var btn    = container.querySelector('.lr-btn');
+
+            // Populate inputs with current map size whenever the panel appears
+            L.DomEvent.on(container, 'mouseenter', function () {
+                var mapSize = map.getSize();
+                inputs[0].value = mapSize.x;
+                inputs[1].value = mapSize.y;
+            });
+
+            // Apply resize — registered once, no risk of duplicate listeners
+            L.DomEvent.on(btn, 'click', function (e) {
+                L.DomEvent.stopPropagation(e);
+                map.getContainer().style.width  = parseInt(inputs[0].value, 10) + 'px';
+                map.getContainer().style.height = parseInt(inputs[1].value, 10) + 'px';
+                map.invalidateSize();
             });
 
             return container;
@@ -50,25 +62,4 @@ import './leaflet.resizer.css';
     L.resizer = function (options) {
         return new L.Control.Resizer(options);
     };
-
-    function lrInitiate(map, container) {
-        var mapSize = map.getSize();
-
-        // Scoped to this control's container — safe with multiple maps on one page
-        var inputs = container.querySelectorAll('.lr-input');
-        inputs[0].value = mapSize.x;
-        inputs[1].value = mapSize.y;
-
-        var btn = container.querySelector('.lr-btn');
-        L.DomEvent.on(btn, 'click', function (e) {
-            L.DomEvent.stopPropagation(e);
-            var newWidth  = parseInt(inputs[0].value, 10) + 'px';
-            var newHeight = parseInt(inputs[1].value, 10) + 'px';
-
-            // map.getContainer() is the public API (Leaflet 1.0+)
-            map.getContainer().style.width  = newWidth;
-            map.getContainer().style.height = newHeight;
-            map.invalidateSize();
-        });
-    }
 })();
