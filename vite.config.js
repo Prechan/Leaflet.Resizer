@@ -14,12 +14,15 @@ export default defineConfig({
       fileName: () => 'leaflet.resizer.min.js'
     },
     outDir: 'dist',
-    rollupOptions: {
+    rolldownOptions: {
       external: ['leaflet'],
       output: {
         globals: { leaflet: 'L' },
-        assetFileNames: (assetInfo) =>
-          assetInfo.name === 'style.css' ? 'leaflet.resizer.min.css' : assetInfo.name
+        assetFileNames: (assetInfo) => {
+          const originalName = assetInfo.originalFileNames?.[0] ?? assetInfo.originalFileName;
+          if (originalName === 'style.css') return 'leaflet.resizer.min.css';
+          return assetInfo.names?.[0] ?? assetInfo.name ?? '[name][extname]';
+        }
       }
     }
   }

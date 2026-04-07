@@ -22,7 +22,7 @@
 
 /* ── Expanded state on hover ── */
 .lr-ctl:hover {
-    width: 104px;
+    width: 116px;
     height: auto;
     cursor: default;
 }
@@ -36,7 +36,7 @@
     display: none;
     flex-direction: column;
     gap: 4px;
-    padding: 6px;
+    padding: 10px;
 }
 
 .lr-ctl:hover .lr-input-container {
@@ -67,7 +67,7 @@
     padding: 0 4px;
     border: 1px solid #cccccc;
     border-radius: 3px;
-    font-size: 11px;
+    font-size: 12px;
     text-align: right;
     color: #333333;
 }
@@ -79,12 +79,13 @@
 
 /* ── Resize button — full width ── */
 .lr-btn {
+    margin-top: 8px;
     height: 24px;
     background-color: #5cb85c;
     border: 1px solid rgba(37, 86, 37, 0.5);
     border-radius: 3px;
     color: #ffffff;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
 }
